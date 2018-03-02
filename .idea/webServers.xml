@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bdcb9ba6-cefc-4b4d-889b-a2d1f70ba93e" name="sp18-cs411-dso-001.cs.illinois.edu" url="http://sp18-cs411-dso-001.cs.illinois.edu">
+        <fileTransfer host="sp18-cs411-dso-001.cs.illinois.edu" port="22" rootFolder="/home/karthik7" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
