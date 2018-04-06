@@ -1,4 +1,4 @@
-package org.cs411.DiseaseOutbreak;
+package org.cs411.DiseaseOutbreak.Resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
