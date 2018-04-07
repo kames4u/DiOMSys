@@ -2,6 +2,7 @@ package org.cs411.DiseaseOutbreak.Model;
 
 public class Disease {
 
+    private int diseaseID;
     private String diseaseName;
     private int occuredYear;
     private int occuredMonth;
@@ -13,6 +14,14 @@ public class Disease {
     private int noOfHospitalized;
     private String dataSource;
     private String category;
+
+    public int getDiseaseID() {
+        return diseaseID;
+    }
+
+    public void setDiseaseID(int diseaseID) {
+        this.diseaseID = diseaseID;
+    }
 
     public String getDiseaseName() {
         return diseaseName;
