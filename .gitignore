@@ -1,2 +1,4 @@
 target/*
 client/node_modules/*
+dashboard-client/node_modules/*
+charts/node_modules/*

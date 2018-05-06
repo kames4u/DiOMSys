@@ -1,0 +1,120 @@
+
+<div class="content mdl-layout">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Disease Outbreak Monitoring System</span>
+    </div>
+  </header>
+</div>
+
+<div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+  <div class="modal fade" id="add-edit-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add/Edit Disease</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+          <div class="modal-body">
+            <input type="hidden" class="input-sm form-control" formControlName="diseaseID">
+            <input type="hidden" class="input-sm form-control" formControlName="category" value="User Reported">
+            <div class="form-group">
+              <label>Disease Name</label>
+              <input type="text" class="input-sm form-control" formControlName="diseaseName">
+              <p class="help-block" *ngIf="!userForm.get('diseaseName').valid && userForm.get('diseaseName').touched">Please enter Disease Name.</p>
+            </div>
+            <div class="form-group">
+              <label>Occurred Year</label>
+              <input type="text" class="input-sm form-control" formControlName="occuredYear">
+              <p class="help-block" *ngIf="!userForm.get('occuredYear').valid && userForm.get('occuredYear').touched">Please enter Occurred Year.</p>
+            </div>
+            <div class="form-group">
+              <label>Occurred Month</label>
+              <input type="text" class="input-sm form-control" formControlName="occuredMonth">
+              <p class="help-block" *ngIf="!userForm.get('occuredMonth').valid && userForm.get('occuredMonth').touched">Please enter Occurred Month.</p>
+            </div>
+            <div class="form-group">
+              <label>Occurred City</label>
+              <input type="text" class="input-sm form-control" formControlName="occuredCity">
+              <p class="help-block" *ngIf="!userForm.get('occuredCity').valid && userForm.get('occuredCity').touched">Please enter Occurred City.</p>
+            </div>
+            <div class="form-group">
+              <label>Occurred State</label>
+              <input type="text" class="input-sm form-control" formControlName="occuredState">
+              <p class="help-block" *ngIf="!userForm.get('occuredState').valid && userForm.get('occuredState').touched">Please enter Occurred State.</p>
+            </div>
+            <div class="form-group">
+              <label>Total illness</label>
+              <input type="text" class="input-sm form-control" formControlName="noOfIllness">
+              <p class="help-block" *ngIf="!userForm.get('noOfIllness').valid && userForm.get('noOfIllness').touched">Please enter Total illness count.</p>
+            </div>
+            <div class="form-group">
+              <label>Total Death</label>
+              <input type="text" class="input-sm form-control" formControlName="noOfDeath">
+              <p class="help-block" *ngIf="!userForm.get('noOfDeath').valid && userForm.get('noOfDeath').touched">Please enter Total Death count.</p>
+            </div>
+            <div class="form-group">
+              <label>Total Hospitalized</label>
+              <input type="text" class="input-sm form-control" formControlName="noOfHospitalized">
+              <p class="help-block" *ngIf="!userForm.get('noOfHospitalized').valid && userForm.get('noOfHospitalized').touched">Please enter Total Hospitalized.</p>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <input type="text" class="input-sm form-control" formControlName="status" placeholder="Pending" >
+            </div>
+            <div class="form-group">
+              <label>Source</label>
+              <input type="text" class="input-sm form-control" formControlName="dataSource" placeholder="User Reported" >
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" #modalClose data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+    <br>
+  </div>
+  <data-table id="diseases-grid" headerTitle="Disease Details" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)"
+              (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)" [rowTooltip]="rowTooltip">
+    <data-table-column [property]="'diseaseName'" [header]="'Disease Name'" [sortable]="true" [resizable]="true">
+    </data-table-column>
+    <data-table-column [property]="'occuredYear'" [header]="'Year'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'occuredMonth'" [header]="'Month'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'occuredCity'" [header]="'City'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'occuredState'" [header]="'State'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'status'" [header]="'Status'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'noOfIllness'" [header]="'Total Illness'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'noOfDeath'" [header]="'Total Death'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'noOfHospitalized'" [header]="'Total Hospital'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'dataSource'" [header]="'Source'" [sortable]="true">
+    </data-table-column>
+    <data-table-column [property]="'Actions'" [header]="'Actions'">
+      <ng-template #dataTableCell let-item="item">
+        <span style="color: rgb(232, 0, 0)">
+          <a href="javascript:void(0);" (click)="getData(item)" data-toggle="modal" data-target="#add-edit-Modal">Edit</a>
+        </span>
+        <span style="color: rgb(232, 0, 0)">
+          <a href="javascript:void(0);" (click)="delData(item)">Delete</a>
+        </span>
+      </ng-template>
+    </data-table-column>
+  </data-table>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-edit-Modal" (click)="initUser()">Add</button>
+
+</div>
