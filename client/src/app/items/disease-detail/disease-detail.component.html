@@ -1,0 +1,116 @@
+<style>
+    .demo-card-wide.mdl-card {
+        width: 400px;
+    }
+</style>
+<div>
+    <div class="demo-card-wide mdl-card mdl-shadow--8dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text" *ngIf="selectedItem.diseaseID; else prompt">Details of
+                {{originalName}}</h2>
+            <ng-template class="mdl-card__title-text" #prompt>Select or Enter disease details</ng-template>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <form novalidate #formRef="ngForm">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Disease Name</label>
+                    <input [(ngModel)]="selectedItem.diseaseName"
+                           name="name" required
+                           placeholder="Disease Name"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Occured State</label>
+                    <input [(ngModel)]="selectedItem.occuredState"
+                           name="state"
+                           placeholder="Enter State"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Occured City</label>
+                    <input [(ngModel)]="selectedItem.occuredCity"
+                           name="city"
+                           placeholder="Enter City"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Occured Month</label>
+                    <input [(ngModel)]="selectedItem.occuredMonth"
+                           name="month"
+                           placeholder="Enter Month"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Occured Year</label>
+                    <input [(ngModel)]="selectedItem.occuredYear"
+                           name="year"
+                           placeholder="Enter Year"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Number of illness</label>
+                    <input [(ngModel)]="selectedItem.noOfIllness"
+                           name="ill"
+                           placeholder="Enter no. of illness"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Number of hospitalized</label>
+                    <input [(ngModel)]="selectedItem.noOfHospitalized"
+                           name="hospitalized"
+                           placeholder="Enter no. of hospitalized"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Number of Death</label>
+                    <input [(ngModel)]="selectedItem.noOfDeath"
+                           name="death"
+                           placeholder="Enter no. of death"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Status</label>
+                    <input [(ngModel)]="selectedItem.status"
+                           name="status"
+                           placeholder="Enter the status"
+                           class="mdl-textfield__input" type="text">
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Category</label>
+                    <input [(ngModel)]="selectedItem.category"
+                           name="category"
+                           placeholder="Unknown Category"
+                           class="mdl-textfield__input" type="text" >
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label>Source</label>
+                    <input [(ngModel)]="selectedItem.dataSource"
+                           name="source"
+                           placeholder="Unknown Source"
+                           class="mdl-textfield__input" type="text" >
+                </div>
+
+            </form>
+        </div>
+        <div class="mdl-card__actions">
+            <button type="submit" (click)="cancelled.emit(selectedItem)"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect">Cancel
+            </button>
+            <button type="submit" [disabled]="!formRef.valid" (click)="saved.emit(selectedItem)"
+                    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Save
+            </button>
+        </div>
+    </div>
+</div>

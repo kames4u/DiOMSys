@@ -53,12 +53,18 @@ public class DiseaseResource {
                 .allow("OPTIONS").build();
     }
 
-    @Path("/{diseaseId}")
-    @DELETE
-    public Response deleteDisease(@PathParam("diseaseId") final int diseaseId, Disease disease) {
+    @POST
+    public Response createDisease(Disease disease) {
         String diseaseDetails = " ";
 
-        System.out.println("Into OPTIONS" + disease.getOccuredState());
+        DiseaseDaoImpl diseaseDaoImpl = new DiseaseDaoImpl();
+
+        int diseaseID = diseaseDaoImpl.createDisease(disease);
+
+        disease.setDiseaseID(diseaseID);
+
+        Gson gson = new Gson();
+        diseaseDetails = gson.toJson(disease);
 
         return Response.ok()
                 .entity(diseaseDetails)
@@ -67,4 +73,17 @@ public class DiseaseResource {
                 .allow("OPTIONS").build();
     }
 
+    @Path("/{diseaseId}")
+    @DELETE
+    public Response deleteDisease(@PathParam("diseaseId") final int diseaseId) {
+
+        DiseaseDaoImpl diseaseDaoImpl = new DiseaseDaoImpl();
+
+        boolean result = diseaseDaoImpl.deleteDiseaseDetail(diseaseId);
+
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
+                .allow("OPTIONS").build();
+    }
 }

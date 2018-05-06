@@ -1,0 +1,68 @@
+<div class="mdl-grid items">
+    <div class="mdl-cell mdl-cell--12-col">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div align="left">
+        <div>
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Disease Name</th>
+                        <th>Occured State</th>
+                        <th>Occured Year</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of pagedItems" (click)="selectItem(item)">
+                        <td class="mdl-data-table__cell--non-numeric">{{item.diseaseName}}</td>
+                        <td>{{item.occuredState}}</td>
+                        <td>{{item.occuredYear}}</td>
+                        <td>{{item.status}}</td>
+                        <td><i class="material-icons" style="color:red" (click)="deleteItem(item)">delete_forever</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)"><<</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)"><</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">>></a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!--
+    <div class="mdl-cell mdl-cell--6-col">
+      <app-items-list [items]="items"
+                      [pagedItems]="pagedItems"
+                      [pager]="pager"
+                      (selected)="selectItem($event)"
+                      (deleted)="deleteItem($event)"
+                      (featured)="setItemAsFeatured($event)">
+      </app-items-list>
+    </div>
+    -->
+    <div class="mdl-cell mdl-cell--6-col">
+        <app-item-detail (saved)="saveItem($event)"
+                         (cancelled)="resetItem($event)"
+                         [item]="selectedItem">
+            Select an Item
+        </app-item-detail>
+    </div>
+</div>
